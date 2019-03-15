@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">UArm</string>
+    <string name="title_activity_child_calibration">UArm</string>
+    <string name="connect">connect</string>
+    <string name="disconnect">disconnect</string>
+    <string name="action_overflow">Menu</string>
+    <string name="title_activity_step1">step1Activity</string>
+    <string name="status_disconnected">Disconnected</string>
+    <string name="status_connecting">Connecting&#8230;</string>
+    <string name="status_connected">Connected to %1$s</string>
+
+    <string name="action_connect">Connect</string>
+    <string name="action_disconnect">Disconnect</string>
+    <string name="action_quit">Quit</string>
+
+    <string name="no_bluetooth">Bluetooth is not available on this device.</string>
+    <string name="paired_devices">Choose a paired Bluetooth device</string>
+    <string name="terminal_message_template">%1$s > %2$s\n</string>
+    <string name="title_activity_start_calibration">start_calibration</string>
+</resources>

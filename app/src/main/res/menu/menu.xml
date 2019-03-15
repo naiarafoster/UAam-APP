@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- "Connect", should appear as action button if possible -->
+    <item
+        android:id="@+id/action_connect"
+        android:icon="@drawable/round_bluetooth_black_18dp"
+        android:title="@string/connect"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/action_disconnect"
+        android:icon="@drawable/round_bluetooth_disabled_black_18dp"
+        android:visible="false"
+        android:title="@string/disconnect"
+        app:showAsAction="always"/>
+
+    <!-- More Options, should always be in the overflow -->
+    <item android:id="@+id/action_overflow"
+        android:title="@string/action_overflow"
+        app:showAsAction="never"/>
+</menu>
