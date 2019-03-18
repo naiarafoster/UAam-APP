@@ -1,0 +1,118 @@
+#include <EEPROM.h>
+#include <SoftwareSerial.h> // use the software uart
+SoftwareSerial bluetooth(2, 4); // RX, TX
+
+
+
+int numOfReadings=10;
+
+
+void Myoread();
+void MyoWrite();
+void FindAverage();
+
+
+void setup() {
+  
+  pinMode(13, OUTPUT); // for LED status
+  Serial.begin(9600);
+
+ 
+
+    delay(300);
+
+ // Serial.println();  
+ // Serial.println("Myoware 2: sensor readings: ");  
+ // MyoWrite(A0);
+    
+}
+
+void loop() {
+   if (bluetooth.available()) { // check if anything in UART buffer
+    if(bluetooth.read() == '1'){ // did we receive this character?
+       digitalWrite(13,!digitalRead(13)); // if so, toggle the onboard LED
+       //Serial.println();
+       //Serial.print("Start writing values on EEPROM");
+       //Serial.println("Myoware 1: sensor readings: ");
+       //MyoWrite(A3);
+    }
+    }
+  
+}
+
+void MyoWrite(int pinNumber){
+    int address=0;
+   //I need to pass the sensor value
+    for(int i=0; i<numOfReadings;i++){
+    Serial.print(i);
+    Serial.println();
+    int sensorValue1 = analogRead(pinNumber)/4; //lower forearm
+    Serial.println("sensor 1 value: ");
+    Serial.println(sensorValue1);
+    EEPROM.put(address, sensorValue1);    
+
+    // maybe put a delay here to get different readdings
+    
+    address= address+1;
+    if(address==EEPROM.length()){
+      address=0;
+      }
+    delay(200); }
+
+    Serial.print("End of reading");
+    Serial.println();
+    Serial.print("Reading Values Stored on EEPROM:");
+    Serial.println();
+    Myoread();
+    Serial.println();
+
+    Serial.println("The average from the sensor reading is: ");
+    FindAverage();
+    
+  }
+
+
+void Myoread(){
+
+    int address=0;
+    int value;
+    int ave=0;
+    
+    for(int i=0; i<numOfReadings;i++){
+    value=EEPROM.read(address);
+    Serial.print(address);
+    Serial.print("\t");
+    Serial.print(value);
+    Serial.println();
+    ave=ave+value;
+    
+    address= address+1;
+    if(address==EEPROM.length()){
+      address=0;
+      }  
+      delay(200);}
+
+      Serial.print(ave/10);
+
+  }  
+
+ void FindAverage(){
+    int address=0;
+    int value;
+    int ave=0;
+    
+    for(int i=0; i<numOfReadings;i++){
+    value=EEPROM.read(address);
+    ave=ave+value;
+      
+    address= address+1;
+    if(address==EEPROM.length()){
+      address=0;
+      }  
+      delay(20);}
+
+      Serial.print(ave/10);
+
+  } 
+
+  
